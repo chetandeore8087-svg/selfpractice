@@ -15,7 +15,7 @@ pipeline {
                 sshagent(['nginx-ssh']) {
                     sh '''
                     rsync -avz -e "ssh -o StrictHostKeyChecking=no" \
-                    salman ubuntu@54.235.13.221:/var/www/html/
+                    salman.html ubuntu@54.235.13.221:/var/www/html/
                     '''
                 }
             }
