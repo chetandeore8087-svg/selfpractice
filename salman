@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Git Checkout') {
+            steps {
+                git branch: 'master',
+                    url: 'https://github.com/chetandeore8087-svg/selfpractice.git'
+            }
+        }
+
+        stage('Deploy via Rsync') {
+            steps {
+                sshagent(['nginx-ssh']) {
+                    sh '''
+                    rsync -avz -e "ssh -o StrictHostKeyChecking=no" \
+                    index.html ubuntu@54.235.13.221:/var/www/html/
+                    '''
+                }
+            }
+        }
+
+    }
+}
